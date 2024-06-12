@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video con Contador</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('Fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #countdown {
+            font-size: 3em; /* Tamaño del contador aumentado */
+            margin-bottom: 40px; /* Mayor espacio entre el contador y el video */
+        }
+        #videoContainer {
+            display: none;
+            width: 100vh; /* Ancho y alto iguales */
+            height: 70vh;
+            margin: 0 auto; /* Centrar el contenedor de video */
+        }
+        iframe {
+            width: 100%; /* Video ocupa todo el ancho del contenedor */
+            height: 100%; /* Video ocupa todo el alto del contenedor */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="countdown"></div>
+        <div id="videoContainer">
+            <iframe src="https://drive.google.com/file/d/1NSa7lib50eXHVbjxJjabcTW0bQuTHoQv/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Jun 15, 2024 21:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="countdown"
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "Disponible Hasta el Viernes";
+                document.getElementById("videoContainer").style.display = "block";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
