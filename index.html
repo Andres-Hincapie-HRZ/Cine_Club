@@ -21,7 +21,7 @@
         }
         .container {
             background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -31,8 +31,10 @@
         }
         #videoContainer {
             display: none;
-            width: 100vh; /* Ancho y alto iguales */
-            height: 70vh;
+            width: 70vw; /* Ancho del video */
+            height: calc(70vw * 0.7); /* Altura proporcional al ancho */
+            max-width: 740px; /* Ancho máximo */
+            max-height: 580px; /* Altura máxima */
             margin: 0 auto; /* Centrar el contenedor de video */
         }
         iframe {
