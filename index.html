@@ -20,26 +20,26 @@
             background-repeat: no-repeat;
         }
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         #countdown {
-            font-size: 3em; /* Tamaño del contador aumentado */
-            margin-bottom: 40px; /* Mayor espacio entre el contador y el video */
+            font-size: 3em;
+            margin-bottom: 40px;
         }
         #videoContainer {
             display: none;
-            width: 70vw; /* Ancho del video */
-            height: calc(70vw * 0.7); /* Altura proporcional al ancho */
-            max-width: 740px; /* Ancho máximo */
-            max-height: 580px; /* Altura máxima */
-            margin: 0 auto; /* Centrar el contenedor de video */
+            width: 70vw;
+            height: calc(70vw * 0.7);
+            max-width: 740px;
+            max-height: 580px;
+            margin: 0 auto;
         }
         iframe {
-            width: 100%; /* Video ocupa todo el ancho del contenedor */
-            height: 100%; /* Video ocupa todo el alto del contenedor */
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -47,34 +47,25 @@
     <div class="container">
         <div id="countdown"></div>
         <div id="videoContainer">
-            <iframe src="https://drive.google.com/file/d/1sev7DtX-XMYcbANwrNkcufTOaiiW6wPu/view?usp=sharing" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe src="https://drive.google.com/file/d/1sev7DtX-XMYcbANwrNkcufTOaiiW6wPu/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
     </div>
 
     <script>
-        // Set the date we're counting down to
         var countDownDate = new Date("Jun 15, 2024 21:00:00").getTime();
 
-        // Update the count down every 1 second
         var x = setInterval(function() {
-
-            // Get today's date and time
             var now = new Date().getTime();
-
-            // Find the distance between now and the count down date
             var distance = countDownDate - now;
 
-            // Time calculations for days, hours, minutes and seconds
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Display the result in the element with id="countdown"
             document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
             + minutes + "m " + seconds + "s ";
 
-            // If the count down is over, write some text 
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("countdown").innerHTML = "Disponible Hasta el Viernes";
