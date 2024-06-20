@@ -7,10 +7,16 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .main-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -18,12 +24,15 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
         }
         .container {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
         #countdown {
             font-size: 3em;
@@ -31,47 +40,162 @@
         }
         #videoContainer {
             display: none;
-            width: 70vw;
-            height: calc(70vw * 0.7);
-            max-width: 740px;
-            max-height: 580px;
+            width: 80vw;
+            height: calc(80vw * 0.5625); /* Relación de aspecto 16:9 */
+            max-width: 800px;
+            max-height: 450px;
             margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
         }
         iframe {
             width: 100%;
             height: 100%;
+            border: none;
+        }
+        .vote-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: url('fondo2.png'); /* Cambia a tu imagen de fondo deseada */
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px; /* Aumenta el espacio vertical y horizontal */
+            margin: 0; /* Espacio arriba y abajo */
+            border-radius: 10px;
+        }
+        .vote-section img {
+            width: 100%; /* Cambia el ancho al 100% */
+            max-width: 740px; /* Máximo ancho */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .vote-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            background-color: #007bff;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+        .vote-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilos para los botones de redes sociales */
+        .social-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .social-button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+        .facebook {
+            background-color: #3b5998;
+        }
+        .instagram {
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+        }
+        .youtube {
+            background-color: #c4302b;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="countdown"></div>
-        <div id="videoContainer">
-            <iframe src="https://drive.google.com/file/d/1sev7DtX-XMYcbANwrNkcufTOaiiW6wPu/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div class="main-section">
+        <div class="container">
+            <div id="countdown"></div>
+            <div id="videoContainer">
+                <iframe src="https://drive.google.com/file/d/1sev7DtX-XMYcbANwrNkcufTOaiiW6wPu/preview" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="vote-section">
+        <img src="Pelis.png" alt="Vota por la próxima película">
+        <a href="https://www.tulinkdedestino.com" class="vote-button" target="_blank">Votar</a>
+
+        <!-- Botones de redes sociales -->
+        <div class="social-buttons">
+            <a href="https://www.facebook.com/groups/424734783817204/" class="social-button facebook" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/andres_hincapie.hrz/" class="social-button instagram" target="_blank">Instagram</a>
+            <a href="https://youtube.com/@eliteprogrammersglobal?si=5V1_5k0UHw-wZ697" class="social-button youtube" target="_blank">YouTube</a>
         </div>
     </div>
 
     <script>
-        var countDownDate = new Date("Jun 15, 2024 21:00:00").getTime();
+        // Función para obtener el próximo sábado a las 9 PM
+        function getNextSaturday9PM() {
+            var now = new Date();
+            var nextSaturday = new Date();
+            nextSaturday.setDate(now.getDate() + ((6 - now.getDay()) % 7));
+            nextSaturday.setHours(21, 0, 0, 0);
+            if (now.getDay() === 6 && now.getHours() >= 21) {
+                nextSaturday.setDate(nextSaturday.getDate() + 7);
+            }
+            return nextSaturday;
+        }
 
-        var x = setInterval(function() {
+        // Función para obtener el próximo viernes a las 11:59 PM
+        function getNextFriday1159PM() {
+            var now = new Date();
+            var nextFriday = new Date();
+            nextFriday.setDate(now.getDate() + ((5 - now.getDay() + 7) % 7));
+            nextFriday.setHours(23, 59, 59, 999);
+            if (now.getDay() === 5 && now.getHours() >= 23 && now.getMinutes() >= 59) {
+                nextFriday.setDate(nextFriday.getDate() + 7);
+            }
+            return nextFriday;
+        }
+
+        // Función para actualizar el contador
+        function updateCountdown() {
             var now = new Date().getTime();
-            var distance = countDownDate - now;
+            var nextSaturday = getNextSaturday9PM().getTime();
+            var nextFriday = getNextFriday1159PM().getTime();
+
+            var distance;
+            if (now < nextFriday) {
+                distance = nextFriday - now;
+                document.getElementById("videoContainer").style.display = "block";
+            } else {
+                distance = nextSaturday - now;
+                document.getElementById("videoContainer").style.display = "none";
+            }
 
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-            + minutes + "m " + seconds + "s ";
+            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "Disponible Hasta el Viernes";
-                document.getElementById("videoContainer").style.display = "block";
-            }
-        }, 1000);
+        // Actualizar el contador cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
     </script>
 </body>
 </html>
